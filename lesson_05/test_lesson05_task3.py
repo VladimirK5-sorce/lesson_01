@@ -4,8 +4,9 @@ from selenium.webdriver.common.by import By
 
 def test_multiple_elements():
     driver = webdriver.Chrome()
+    driver.implicitly_wait(5)
     try:
-        driver.get("https://qa-territory.online")
+        driver.get("https://httpbin.qa-territory.online/links/10")
 
         links = driver.find_elements(By.TAG_NAME, "a")
 

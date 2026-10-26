@@ -4,17 +4,19 @@ from selenium.webdriver.common.by import By
 
 def test_form_submission():
     driver = webdriver.Chrome()
-    initial_url = "https://qa-territory.online"
-    driver.get(initial_url)
+    driver.implicitly_wait(5)
+    try:
+        initial_url = "https://httpbin.qa-territory.online/forms/post"
+        driver.get(initial_url)
 
-    name_input = driver.find_element(By.NAME, "custname")
-    name_input.send_keys("Владимир")
+        name_input = driver.find_element(By.NAME, "custname")
+        name_input.send_keys("Владимир")
 
-    submit_button = driver.find_element(By.CSS_SELECTOR, "form button")
-    submit_button.click()
+        submit_button = driver.find_element(By.TAG_NAME, "button")
+        submit_button.click()
 
-    assert driver.current_url != initial_url, (
-        f"URL не изменился и остался {initial_url}"
-    )
-
-    driver.quit()
+        assert driver.current_url != initial_url, (
+            f"URL не изменился и остался {initial_url}"
+        )
+    finally:
+        driver.quit()
