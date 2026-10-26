@@ -3,10 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 def test_form_submission():
-    options = webdriver.ChromeOptions()
-    options.add_argument('--ignore-certificate-errors')
-    
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
     initial_url = "https://qa-territory.online"
     driver.get(initial_url)
 
@@ -16,6 +13,8 @@ def test_form_submission():
     submit_button = driver.find_element(By.CSS_SELECTOR, "form button")
     submit_button.click()
 
-    assert driver.current_url != initial_url, f"URL не изменился и остался {initial_url}"
+    assert driver.current_url != initial_url, (
+        f"URL не изменился и остался {initial_url}"
+    )
 
     driver.quit()
